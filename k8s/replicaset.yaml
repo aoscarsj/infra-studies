@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx # daqui p cima definindo o nginx e aq a label de busca
+  template: # aqui eh o template do nosso pod
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: wesleywilliams:nginx-imersao13
+          ports:
+            - containerPort: 80

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 12
+  selector:
+    matchLabels:
+      app: nginx # daqui p cima definindo o nginx e aq a label de busca
+  template: # aqui eh o template do nosso pod
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80

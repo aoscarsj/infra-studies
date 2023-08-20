@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  myapp:
+    build: . # p ele n ir na rede e buscar na minha maquina
+    container_name: myapp
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./html:/usr/share/nginx/html
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fullcycle
+    ports:
+      - 3306:3306 # apontar a porta do container para a porta da maquina.
+    volumes:
+      - ./mysql:/var/lib/mysql # salvar o BD na minha maq.
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq2
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
